@@ -2,11 +2,12 @@ import "./card.scss";
 import { Link } from "react-router-dom";
 const Card = ({ item }) => {
   return (
-    <Link to={`product/${item.id}`}>
+    <Link className="link" to={`product/${item.id}`}>
       <div className="card">
         <div className="image">
-          <img src={item.img} alt="" />
-          <img src={item?.img2} alt="" />
+          {item.isNew && <span>New Season</span>}
+          <img src={item.img} alt="" className="mainImg" />
+          <img src={item?.img2} alt="" className="secondImg" />
         </div>
         <h2>{item.title}</h2>
         <div className="prices">
