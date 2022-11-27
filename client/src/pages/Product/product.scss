@@ -1,1 +1,143 @@
-.product {}
+.product {
+    display: flex;
+    padding: 20px 50px;
+    gap: 50px;
+
+    .left {
+        flex: 1;
+        display: flex;
+        gap: 20px;
+
+        .imgs {
+            flex: 1;
+
+            img {
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+                cursor: pointer;
+                margin-bottom: 10px;
+            }
+        }
+
+        .mainImg {
+            flex: 5;
+
+
+            img {
+                width: 100%;
+                max-height: 800px;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .price {
+            font-size: 30px;
+            color: #662FFC;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: 300;
+            text-align: justify;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            button {
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                background-color: #dbdbdb;
+                border: none;
+            }
+        }
+
+        .add {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-width: 250px;
+            color: #fff;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            background-color: #662FFC;
+            padding: 10px;
+            width: fit-content;
+        }
+
+        .links {
+            display: flex;
+            gap: 20px;
+
+            .item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                text-transform: uppercase;
+                color: #662FFC;
+                font-size: 14;
+                cursor: pointer;
+            }
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            color: #727171;
+            font-size: 14px;
+            margin-top: 30px;
+
+        }
+
+        hr {
+            border: 1px solid rgb(230, 228, 228);
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            color: #727171;
+            font-size: 14px;
+            margin-top: 30px;
+
+            hr {
+                width: 200px;
+                border: 1px solid rgb(230, 228, 228);
+            }
+
+            span {
+                cursor: pointer;
+            }
+
+            p {
+                color: black;
+                font-size: 18px;
+                text-align: start;
+            }
+        }
+
+
+    }
+}
