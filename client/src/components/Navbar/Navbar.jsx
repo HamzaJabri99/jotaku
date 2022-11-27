@@ -41,7 +41,7 @@ const Navbar = () => {
         </div>
         <div className="center">
           <Link className="link" to="/">
-            Ｊｏｔａｋｕ
+            Jotaku
           </Link>
         </div>
         <div className="right">
