@@ -1,40 +1,60 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Card from "../Card/Card";
 import "./featuredProducts.scss";
 
 const FeaturedProducts = ({ type }) => {
-  const data = [
-    {
-      id: 1,
-      img: "https://images.pexels.com/photos/13666115/pexels-photo-13666115.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      img2: "https://images.pexels.com/photos/13666609/pexels-photo-13666609.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "sports",
-      isNew: true,
-      oldPrice: 19,
-      price: 15,
-    },
-    {
-      id: 2,
-      img: "https://images.pexels.com/photos/3379242/pexels-photo-3379242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "jacket",
-      isNew: true,
-      oldPrice: 19,
-      price: 15,
-    },
-    {
-      id: 3,
-      img: "https://images.pexels.com/photos/3081699/pexels-photo-3081699.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "hat",
-      oldPrice: 19,
-      price: 15,
-    },
-    {
-      id: 4,
-      img: "https://images.pexels.com/photos/2737004/pexels-photo-2737004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "glasses",
-      oldPrice: 19,
-      price: 15,
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     img: "https://images.pexels.com/photos/13666115/pexels-photo-13666115.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  //     img2: "https://images.pexels.com/photos/13666609/pexels-photo-13666609.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  //     title: "sports",
+  //     isNew: true,
+  //     oldPrice: 19,
+  //     price: 15,
+  //   },
+  //   {
+  //     id: 2,
+  //     img: "https://images.pexels.com/photos/3379242/pexels-photo-3379242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  //     title: "jacket",
+  //     isNew: true,
+  //     oldPrice: 19,
+  //     price: 15,
+  //   },
+  //   {
+  //     id: 3,
+  //     img: "https://images.pexels.com/photos/3081699/pexels-photo-3081699.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  //     title: "hat",
+  //     oldPrice: 19,
+  //     price: 15,
+  //   },
+  //   {
+  //     id: 4,
+  //     img: "https://images.pexels.com/photos/2737004/pexels-photo-2737004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  //     title: "glasses",
+  //     oldPrice: 19,
+  //     price: 15,
+  //   },
+  // ];
+  const [products, setProducts] = useState([]);
+  const apiURL = process.env.REACT_APP_API_URL;
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const resp = await axios.get(`${apiURL}/products?populate=*`, {
+          headers: {
+            Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
+          },
+        });
+        setProducts(resp.data.data);
+        console.log(resp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProducts();
+  }, []);
   return (
     <div className="featuredProducts">
       <div className="top">
@@ -47,7 +67,7 @@ const FeaturedProducts = ({ type }) => {
         </p>
       </div>
       <div className="bottom">
-        {data.map((item) => (
+        {products?.map((item) => (
           <Card key={item.id} item={item} />
         ))}
       </div>

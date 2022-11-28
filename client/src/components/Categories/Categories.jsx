@@ -54,7 +54,6 @@ const Categories = () => {
               <img
                 src="https://i.kinja-img.com/gawker-media/image/upload/c_fit,f_auto,g_center,pg_1,q_60,w_965/f0e3d6ecd627c6399334ce944f0edb89.jpg"
                 alt=""
-                srcset=""
               />
               <button>
                 <Link to={"products/1"} className="link">
@@ -66,11 +65,7 @@ const Categories = () => {
         </div>
         <div className="row">
           <div className="col">
-            <img
-              src="https://wallpapercave.com/wp/wp7578969.jpg"
-              alt=""
-              srcset=""
-            />
+            <img src="https://wallpapercave.com/wp/wp7578969.jpg" alt="" />
             <button>
               <Link to={"products/1"} className="link">
                 Elegant
