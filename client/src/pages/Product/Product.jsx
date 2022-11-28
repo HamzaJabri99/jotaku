@@ -3,28 +3,45 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BalanceIcon from "@mui/icons-material/Balance";
 import "./product.scss";
+import useFetch from "../../hooks/useFetch";
+import { useParams } from "react-router-dom";
 const Product = () => {
-  const images = [
-    "https://tokyofashion.com/wp-content/uploads/2022/03/2021-06-06-024-003-Harajuku-NK-DZ7-0029.jpg",
-    "https://tokyofashion.com/wp-content/uploads/2022/03/2021-06-06-024-006-Harajuku-NK-DZ7-0054.jpg",
-  ];
-  const [img, setImg] = useState(0);
+  // const images = [
+  //   "https://tokyofashion.com/wp-content/uploads/2022/03/2021-06-06-024-003-Harajuku-NK-DZ7-0029.jpg",
+  //   "https://tokyofashion.com/wp-content/uploads/2022/03/2021-06-06-024-006-Harajuku-NK-DZ7-0054.jpg",
+  // ];
+  const [selectedImg, setImg] = useState("img");
+
+  const prodId = useParams().id;
+  const { data, loading, error } = useFetch(`products/${prodId}?populate=*`);
   const [quantity, setQuantity] = useState(1);
   const [description, setDescription] = useState(false);
+
   return (
     <div className="product">
       <div className="left">
         <div className="imgs">
-          <img src={images[0]} alt="" onClick={() => setImg(0)} />
-          <img src={images[1]} alt="" onClick={() => setImg(1)} />
+          <img
+            src={`${process.env.REACT_APP_UPLOADS_URL}${data?.attributes?.img?.data?.attributes.url}`}
+            alt=""
+            onClick={() => setImg("img")}
+          />
+          <img
+            src={`${process.env.REACT_APP_UPLOADS_URL}${data?.attributes?.img2?.data?.attributes.url}`}
+            alt=""
+            onClick={() => setImg("img2")}
+          />
         </div>
         <div className="mainImg">
-          <img src={images[img]} alt="" />
+          <img
+            src={`${process.env.REACT_APP_UPLOADS_URL}${data?.attributes[selectedImg]?.data?.attributes.url}`}
+            alt=""
+          />
         </div>
       </div>
       <div className="right">
-        <h1>Product Title</h1>
-        <span className="price">$200</span>
+        <h1>{data?.attributes?.title}</h1>
+        <span className="price">${data?.attributes?.price}</span>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
           cupiditate? Amet esse quae, explicabo adipisci ullam facere nam

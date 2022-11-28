@@ -12,12 +12,9 @@ const Slider = () => {
 
   const decSlider = () => {
     setSlide(slide === 0 ? data.length - 1 : slide - 1);
-
-    console.log(slide);
   };
   const incSlider = () => {
     setSlide(slide === data.length - 1 ? 0 : slide + 1);
-    console.log(slide);
   };
   return (
     <div className="slider">

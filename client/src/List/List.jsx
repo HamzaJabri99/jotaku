@@ -85,7 +85,6 @@ const List = ({ catId, sortPrice, maxPrice, selectedSub }) => {
     )}&filters[price][$lte]=${maxPrice}&sort=price:${sortPrice}`
   );
 
-  console.log(data);
   return (
     <div className="list">
       {error
