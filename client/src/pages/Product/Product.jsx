@@ -16,7 +16,6 @@ const Product = () => {
   const { data, loading, error } = useFetch(`products/${prodId}?populate=*`);
   const [quantity, setQuantity] = useState(1);
   const [description, setDescription] = useState(false);
-
   return (
     <div className="product">
       <div className="left">
@@ -42,12 +41,7 @@ const Product = () => {
       <div className="right">
         <h1>{data?.attributes?.title}</h1>
         <span className="price">${data?.attributes?.price}</span>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
-          cupiditate? Amet esse quae, explicabo adipisci ullam facere nam
-          assumenda vero enim in sed illo laudantium animi neque molestias.
-          Quisquam, magnam!
-        </p>
+        <p>{data?.attributes?.description}</p>
         <div className="quantity">
           <button
             onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}
@@ -70,9 +64,25 @@ const Product = () => {
           </div>
         </div>
         <div className="info">
-          <span>Vendor: JapanExpo</span>
-          <span>Product Type: Skirt</span>
-          <span>Tag: Skirt, Women, Kids</span>
+          <span>Vendor: Jotaku</span>
+          <span>
+            Product Type:
+            {data?.attributes?.categories?.data?.map((item) => (
+              <span key={item.id}> {item?.attributes?.title} </span>
+            ))}
+            ,
+            {data?.attributes?.sub_categories?.data.length > 0
+              ? data?.attributes?.sub_categories?.data?.map((item) => (
+                  <span key={item.id}> {item?.attributes?.title} </span>
+                ))
+              : "full Cosplay"}
+          </span>
+          <span>
+            Tag:
+            {data?.attributes?.categories?.data?.map((item) => (
+              <span key={item.id}> {item?.attributes?.title}</span>
+            ))}
+          </span>
         </div>
         <hr />
         <div className="details">
