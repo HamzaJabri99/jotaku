@@ -37,9 +37,11 @@ const FeaturedProducts = ({ type }) => {
   //   },
   // ];
   //const [products, setProducts] = useState([]);
-  const { data: products, loading } = useFetch(
-    `/products?populate=*&filters[type] [$eq]=${type}`
-  );
+  const {
+    data: products,
+    loading,
+    error,
+  } = useFetch(`/products?populate=*&filters[type] [$eq]=${type}`);
 
   return (
     <div className="featuredProducts">
@@ -53,7 +55,9 @@ const FeaturedProducts = ({ type }) => {
         </p>
       </div>
       <div className="bottom">
-        {loading
+        {error
+          ? "Something went wrong"
+          : loading
           ? "loading"
           : products?.map((item) => <Card key={item.id} item={item} />)}
       </div>
