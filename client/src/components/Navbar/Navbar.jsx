@@ -7,7 +7,11 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Cart from "../Cart/Cart";
+import { useSelector } from "react-redux";
 const Navbar = () => {
+  const products = useSelector((state) => state.cart.products);
+
+  console.log();
   const [openCart, setOpenCart] = useState(false);
   return (
     <div className="navbar">
@@ -79,7 +83,7 @@ const Navbar = () => {
               onClick={() => setOpenCart((prev) => !prev)}
             >
               <ShoppingCartOutlinedIcon />
-              <span className="">0</span>
+              <span className="">{products.length}</span>
             </div>
           </div>
         </div>

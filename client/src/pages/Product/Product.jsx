@@ -5,13 +5,11 @@ import BalanceIcon from "@mui/icons-material/Balance";
 import "./product.scss";
 import useFetch from "../../hooks/useFetch";
 import { useParams } from "react-router-dom";
+import { addToCart } from "../../redux/cartReducer";
+import { useDispatch } from "react-redux";
 const Product = () => {
-  // const images = [
-  //   "https://tokyofashion.com/wp-content/uploads/2022/03/2021-06-06-024-003-Harajuku-NK-DZ7-0029.jpg",
-  //   "https://tokyofashion.com/wp-content/uploads/2022/03/2021-06-06-024-006-Harajuku-NK-DZ7-0054.jpg",
-  // ];
   const [selectedImg, setImg] = useState("img");
-
+  const dispatch = useDispatch();
   const prodId = useParams().id;
   const { data, loading, error } = useFetch(`products/${prodId}?populate=*`);
   const [quantity, setQuantity] = useState(1);
@@ -51,7 +49,21 @@ const Product = () => {
           {quantity}
           <button onClick={() => setQuantity((prev) => prev + 1)}>+</button>
         </div>
-        <button className="add">
+        <button
+          className="add"
+          onClick={() =>
+            dispatch(
+              addToCart({
+                id: data.id,
+                title: data.attributes.title,
+                description: data.attributes.description,
+                price: data.attributes.price,
+                img: data.attributes.img.data.attributes.url,
+                quantity,
+              })
+            )
+          }
+        >
           <AddShoppingCartIcon /> Add to cart
         </button>
         <div className="links">
