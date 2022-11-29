@@ -1,12 +1,14 @@
 import { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import BalanceIcon from "@mui/icons-material/Balance";
 import "./product.scss";
 import useFetch from "../../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../../redux/cartReducer";
-import { useDispatch } from "react-redux";
+import { addToWish, removeFromWish } from "../../redux/wishReducer";
+import { useDispatch, useSelector } from "react-redux";
 const Product = () => {
   const [selectedImg, setImg] = useState("img");
   const dispatch = useDispatch();
@@ -14,6 +16,8 @@ const Product = () => {
   const { data, loading, error } = useFetch(`products/${prodId}?populate=*`);
   const [quantity, setQuantity] = useState(1);
   const [description, setDescription] = useState(false);
+  const favorites = useSelector((state) => state.wish.favorites);
+  const favorite = favorites.find((product) => product.id === data?.id);
   return (
     <div className="product">
       <div className="left">
@@ -67,9 +71,32 @@ const Product = () => {
           <AddShoppingCartIcon /> Add to cart
         </button>
         <div className="links">
-          <div className="item">
-            <FavoriteBorderIcon /> Add to wish list
-          </div>
+          {favorite ? (
+            <div
+              className="item"
+              onClick={() => dispatch(removeFromWish({ id: favorite.id }))}
+            >
+              <FavoriteIcon /> Remove From wish list
+            </div>
+          ) : (
+            <div
+              className="item"
+              onClick={() =>
+                dispatch(
+                  addToWish({
+                    id: data.id,
+                    title: data.attributes.title,
+                    description: data.attributes.description,
+                    price: data.attributes.price,
+                    img: data.attributes.img.data.attributes.url,
+                    quantity,
+                  })
+                )
+              }
+            >
+              <FavoriteBorderIcon /> Add to wish list
+            </div>
+          )}
           <div className="item">
             <BalanceIcon />
             <span>Add to compare</span>

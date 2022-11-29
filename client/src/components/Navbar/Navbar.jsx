@@ -1,5 +1,6 @@
 import "./navbar.scss";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchIcon from "@mui/icons-material/Search";
@@ -8,11 +9,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Cart from "../Cart/Cart";
 import { useSelector } from "react-redux";
+import WishList from "../Wishlist/WishList";
 const Navbar = () => {
   const products = useSelector((state) => state.cart.products);
 
   console.log();
   const [openCart, setOpenCart] = useState(false);
+  const [openWish, setOpenWish] = useState(false);
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -27,17 +30,17 @@ const Navbar = () => {
           </div>
           <div className="item">
             <Link className="link" to={"/products/1"}>
-              Men
-            </Link>
-          </div>
-          <div className="item">
-            <Link className="link" to={"/products/2"}>
               Women
             </Link>
           </div>
           <div className="item">
+            <Link className="link" to={"/products/2"}>
+              Men
+            </Link>
+          </div>
+          <div className="item">
             <Link className="link" to={"/products/3"}>
-              Children
+              Kids
             </Link>
           </div>
           <div className="item">
@@ -77,10 +80,28 @@ const Navbar = () => {
           <div className="icons">
             <SearchIcon />
             <PersonOutlineOutlinedIcon />
-            <FavoriteBorderIcon />
+            {openWish ? (
+              <FavoriteIcon
+                sx={{ color: `${openWish ? "#662FFC" : ""}` }}
+                onClick={() => {
+                  setOpenWish((prev) => !prev);
+                  setOpenCart(false);
+                }}
+              />
+            ) : (
+              <FavoriteBorderIcon
+                onClick={() => {
+                  setOpenWish((prev) => !prev);
+                  setOpenCart(false);
+                }}
+              />
+            )}
             <div
               className="cartIcon"
-              onClick={() => setOpenCart((prev) => !prev)}
+              onClick={() => {
+                setOpenCart((prev) => !prev);
+                setOpenWish(false);
+              }}
             >
               <ShoppingCartOutlinedIcon />
               <span className="">{products.length}</span>
@@ -89,6 +110,7 @@ const Navbar = () => {
         </div>
       </div>
       {openCart && <Cart />}
+      {openWish && <WishList />}
     </div>
   );
 };

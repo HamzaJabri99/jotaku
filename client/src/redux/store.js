@@ -11,20 +11,22 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-// const stripe = require("stripe")(
-//   "sk_test_51M9XSBGogcCZVVw2tLvHGUo8hsXg0GuvkFTRytXUawZ6Apr48xggTATgZ0btcBRYzHnqnqF7oxijwqzV07cdcq1D00Rr6LPsTD"
-// );
+import wishReducer from "./wishReducer";
 
 const persistConfig = {
   key: "cart",
   version: 1,
   storage,
 };
-
+const persistWishConfig = {
+  key: "wish",
+  version: 1,
+  storage,
+};
 const persistedReducer = persistReducer(persistConfig, cartReducer);
-
+const persistedWishReducer = persistReducer(persistWishConfig, wishReducer);
 const store = configureStore({
-  reducer: { cart: persistedReducer },
+  reducer: { cart: persistedReducer, wish: persistedWishReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
