@@ -11,6 +11,9 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+// const stripe = require("stripe")(
+//   "sk_test_51M9XSBGogcCZVVw2tLvHGUo8hsXg0GuvkFTRytXUawZ6Apr48xggTATgZ0btcBRYzHnqnqF7oxijwqzV07cdcq1D00Rr6LPsTD"
+// );
 
 const persistConfig = {
   key: "cart",
