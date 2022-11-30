@@ -3,6 +3,12 @@
 
 Ecommerce web App for selling Anime/manga and games. cosplays/wigs/accessories for men women and kids.
 
+# Project Demo
+[![Alt text](https://github.com/HamzaJabri99/jotaku/blob/main/client/public/imgs/Screenshot_553.png?raw=true)](https://github.com/HamzaJabri99/jotaku/blob/main/client/public/imgs/Screenshot_553.png?raw=true)
+
+[![Alt text](https://raw.githubusercontent.com/HamzaJabri99/jotaku/main/client/public/imgs/Screenshot_554.png)](https://raw.githubusercontent.com/HamzaJabri99/jotaku/main/client/public/imgs/Screenshot_554.png)
+
+[![Alt text](https://raw.githubusercontent.com/HamzaJabri99/jotaku/main/client/public/imgs/Screenshot_555.png)](https://raw.githubusercontent.com/HamzaJabri99/jotaku/main/client/public/imgs/Screenshot_555.png)
 
 ## Stacks
 
